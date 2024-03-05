@@ -1,0 +1,35 @@
+<script>
+  // ! cOMPONENTIZAR ARRAY Y QUE AHAGA EL FOREACH DESDE EL MD CORRESPONDIENTE. Seria uno por ejemplar
+    const movies = 'imagen.png|Aquaman|2023|video'
+    const markdownString = movies;
+
+
+const lines = markdownString.trim().split('\n');
+const dataArray = lines.map(line => {
+  const [coverImage, titulo, fecha, video] = line.split('|');
+  return { coverImage, titulo, fecha: parseInt(fecha), video };
+});
+
+console.log(dataArray);
+
+
+
+const container = document.getElementById('container');
+
+dataArray.forEach(movie => {
+  const div = document.createElement('div');
+  div.innerHTML = `
+    <img> $(movie.coverImage) </img>
+    <p><strong>Nombre:</strong> ${movie.titulo}</p>
+    <p><strong>Lanzamiento:</strong> ${movie.fecha}</p>
+    <p><strong>Frame:</strong> ${movie.video}</p>
+  `;
+  container.appendChild(div);
+});
+
+
+</script>
+
+<div id="container" class="text-white">
+
+</div>
