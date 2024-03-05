@@ -3,20 +3,11 @@ import TemplateMovies from "./TemplateMovies.astro"
 ---
 
 <section class="max-w-[90vw] h-96 shadow-2xl shadow-white m-auto">
-    <article>
+    <article id="post">
         <TemplateMovies></TemplateMovies>
     </article>
 </section>
-<!--  
-    ! La idea es que del array del templateMovies agarre la imagen y la pinche en el article
+
 <script>
-    import TemplateMovies from '../components/TemplateMovies.astro';
-    const article = document.getElementsByName('article');
 
-    
-    function cover() =>
-        article.innerHTML =
-        <img> $(TemplateMovies.movie.coverImage) </img>;
 </script>
-
--->
