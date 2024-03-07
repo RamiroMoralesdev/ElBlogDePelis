@@ -1,15 +1,22 @@
 ---
-import TemplateMovies from "../pages/TemplateMovies.astro"
+import TemplateMovies from "./TemplateMovies.astro"
 ---
 
-<section class="max-w-[90vw] h-96 shadow-2xl shadow-white m-auto">
-    <article id="post">
-        <a href="/src/pages/TemplateMovies.astro">
-            <img src="/public/favicon.png" alt="">
-        </a>
-    </article>
-</section>
 
-<script>
+<dialog id="alert-dialog" class="w-5/6 h-4/5">
+    <TemplateMovies></TemplateMovies>
+    <button onclick="this.parentElement.close()">X</button>
+  </dialog>\
+  
+  <button id="show-button">
+    <img src="/public/favicon.png" alt="" class="w-72">
+  </button>
 
-</script>
+
+  <script>
+    const showButton = document.querySelector("#show-button");
+showButton.addEventListener("click", function () {
+  const alertDialog = document.querySelector("#alert-dialog");
+  alertDialog.showModal();
+});
+  </script>
