@@ -1,4 +1,4 @@
-<script>
+  <script>
   // Fetch the markdown file
   fetch('/src/posts/peliculas/Aquaman.md')
     .then(response => response.text())
@@ -9,24 +9,22 @@
 
       movies.forEach(movieString => {
         const [coverImage, title, fecha, video] = movieString.split('|').map(item => item.trim());
-        const div = document.createElement('div');
         const img = document.createElement('img');
-        
-        const frame = document.getElementById('frame');
+        const frame = document.createElement('iframe');
 
         img.src = coverImage;
         img.alt = "Movie Cover";
-        img.width = 100;
-        div.appendChild(img);
+        img.width = 200;
+        container.appendChild(img);
 
-        
-        frame.src = video;
-
-
-        div.innerHTML += `
+        container.innerHTML += `
           <p>Nombre: ${title}</p>
           <p>Lanzamiento: ${fecha}</p>
         `;
+
+        
+        frame.src = video;
+        frame.allowfullscreen = true
 
         container.appendChild(div);
       });
@@ -35,19 +33,30 @@
       console.error('Error fetching data:', error);
     });
 </script>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> ${titulo} </title>
-</head>
-<body>
-  
-  <div id="container" class="text-red font-serif text-3xl">
-    
-    <iframe id="frame" src="" allowfullscreen ></iframe>
-  </div>
 
-</body>
-</html>
+<div id="container">
+
+</div>
+  
+ 
+
+<style>
+  #container {
+    width: 100vw;
+    height: 73vh;
+    background-color: blue;
+    color: white;
+   
+
+    & img {
+      float: left;
+    }
+
+    & p{
+      display: flex;
+      flex-direction: column;
+      font-size: 2em;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  }
+</style>
