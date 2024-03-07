@@ -1,62 +1,53 @@
 <script>
+  // Fetch the markdown file
+  fetch('/src/posts/peliculas/Aquaman.md')
+    .then(response => response.text())
+    .then(markdownString => {
+      const movies = markdownString.trim().split('\n');
 
-  const movies = '/public/favicon.png | Aquaman | 2023 | Accion, Multiverso DC | https://drive.google.com/file/d/1fU5rCO8BghqfvRP1uDk6u-0LjsVIpx4i/preview';
-  const markdownString = movies;
-  
-  const lines = markdownString.trim().split('\n');
-  const dataArray = lines.map(line => {
-    const [coverImage, titulo, fecha, tags, video] = line.split('|');
-    return { coverImage, titulo, fecha: parseInt(fecha), tags, video };
-  });
-  
-  console.log(dataArray);
-  
-  const container = document.getElementById('container');
-  
-  dataArray.forEach(movie => {
-    const div = document.createElement('div');
-    const img = document.createElement('img');
-    const tags = document.getElementById("tags")
-    const frame = document.getElementById('frame')
-  
-    img.src = movie.coverImage;
-    img.alt = "Movie Cover";
-    img.width = 100;
-  
-    div.appendChild(img);
-    
-    tags.innerHTML = 'Accion, Multiverso DC';
-    frame.src = movie.video;
-  
-    div.innerHTML += `
-      <p>Nombre: ${movie.titulo}</p>
-      <p>Lanzamiento: ${movie.fecha}</p>
-    `;
-  
-    container.appendChild(div);
-  
-  });
-  
-  
-  
-  </script>
-  
+      const container = document.getElementById('container');
+
+      movies.forEach(movieString => {
+        const [coverImage, title, fecha, video] = movieString.split('|').map(item => item.trim());
+        const div = document.createElement('div');
+        const img = document.createElement('img');
+        
+        const frame = document.getElementById('frame');
+
+        img.src = coverImage;
+        img.alt = "Movie Cover";
+        img.width = 100;
+        div.appendChild(img);
+
+        
+        frame.src = video;
+
+
+        div.innerHTML += `
+          <p>Nombre: ${title}</p>
+          <p>Lanzamiento: ${fecha}</p>
+        `;
+
+        container.appendChild(div);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D</title>
+  <title> ${titulo} </title>
 </head>
 <body>
   
+  <div id="container" class="text-red font-serif text-3xl">
     
-  <div id="container" class="text-white font-serif text-3xl flex flex-column">
-    <p id="tags" class="bg-yellow-300 h-fit text-black"></p>
-    <iframe id="frame" src=""  allowfullscreen width="500" height="300"></iframe>
+    <iframe id="frame" src="" allowfullscreen ></iframe>
   </div>
-
 
 </body>
 </html>
-  
