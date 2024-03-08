@@ -1,0 +1,17 @@
+<style>
+    :root {
+        --contenedor-w : 320 ; /* no hay unidades así que podemos hacer la división */ 
+        --container-h : 180 ; --logotipo-w : 40 ;
+        --logo-h : 20 ;
+        --velocidad : 90 ; /* píxeles por segundo */
+
+        --duración-x : calc(
+        (var( -contenedor-w ) - var( -logo-w )) / var( -velocidad ) * 1s
+  );
+    --duración-y : calc(
+    (var( -contenedor-h ) - var( -logo-h )) / var( -velocidad ) * 1s
+  );
+}
+
+
+</style>

@@ -27,21 +27,17 @@ const { title } = Astro.props;
 	:root {
 		font-family: 'Jost', sans-serif;
 		font-weight: bold;
+
 	}
 	html {
 		font-family: system-ui, sans-serif;
 		background: #13151a;
 		background-size: 224px;
 	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
+
+	::selection{
+		background-color: yellow;
+		color: black;
 	}
+
 </style>

@@ -1,11 +1,13 @@
+
+
 <div>
     
     <div class="w-screen h-auto text-center">
         <img src="/public/favicon.png" alt="Logotipo de El Blog De Pelis" class="w-20 absolute left-8 top-7">
-        <input type="search" class="w-4/6 h-10 bg-black mt-10 rounded-2xl shadow-sm shadow-emerald-300">
+        <input type="search" placeholder="Buscador" class="w-4/6 h-10 bg-black text-white mt-10 shadow-sm shadow-emerald-300 placeholder:text-neutral-400 placeholder:text-xl">
     </div>
 
-     <section class="text-white text-3xl font-extrabold w-screen mt-10 mb-20 flex justify-around">
+     <section id="movies" class="text-white text-3xl font-extrabold w-screen mt-10 mb-20 flex justify-around">
         <button class=" bg-emerald-400 w-40 h-16  hover:bg-yellow-500 ">
             <a class="" href="#">Peliculas</a>
         </button>
@@ -14,7 +16,7 @@
             <a href="#">Series</a>
         </button>
 
-        <button class=" bg-emerald-400 w-40 h-16  hover:bg-yellow-500">
+        <button id="genres" class=" bg-emerald-400 w-40 h-16  hover:bg-yellow-500">
             <a href="#">Generos</a>
         </button>
      </section>
@@ -23,6 +25,8 @@
 <script>
 
     let btnSeries = document.getElementById("series");
+    const btnMovies = document.getElementById("movies");
+    const btnGenrees = document.getElementById("genres");
 
 
     btnSeries.addEventListener("click", function() {
@@ -30,6 +34,7 @@
     btnSeries.style.fontSize = ".7em";
     btnSeries.style.background = "#eab308";
 
-});
+})
+
 
 </script>
