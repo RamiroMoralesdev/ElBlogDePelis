@@ -1,62 +1,43 @@
-  <script>
-  // Fetch the markdown file
-  fetch('/src/posts/peliculas/Aquaman.md')
-    .then(response => response.text())
-    .then(markdownString => {
-      const movies = markdownString.trim().split('\n');
+<script>
+ // markdownString = 'coverImage | title | date | tags | video '
+    const markdownString = ` https://cineteatrolafalla.alvearmendoza.gob.ar/wp-content/uploads/2023/12/Aquaman-2-Poster-1-900x1125-1.jpg | Aquaman | 2023 | Accion, Multiverso DC | https://drive.google.com/file/d/1fU5rCO8BghqfvRP1uDk6u-0LjsVIpx4i/preview`;
 
-      const container = document.getElementById('container');
+    const movies = markdownString.trim().split('\n');
 
-      movies.forEach(movieString => {
-        const [coverImage, title, fecha, video] = movieString.split('|').map(item => item.trim());
-        const img = document.createElement('img');
-        const frame = document.createElement('iframe');
+    const container = document.getElementById('container');
 
-        img.src = coverImage;
-        img.alt = "Movie Cover";
-        img.width = 200;
-        container.appendChild(img);
+    movies.forEach(movieString => {
+      const [coverImage, title, date, tags, video] = movieString.split('|').map(item => item.trim());
+      const div = document.createElement('div');
+      const img = document.createElement('img');
+      const frame = document.createElement('iframe');
 
-        container.innerHTML += `
-          <p>Nombre: ${title}</p>
-          <p>Lanzamiento: ${fecha}</p>
-        `;
+      img.src = coverImage;
+      img.alt = "Movie Cover";
+      img.width = 200; 
+      div.appendChild(img);
 
-        
-        frame.src = video;
-        frame.allowfullscreen = true
+      div.innerHTML += `
+        <h1>Nombre: ${title}</h1>
+        <h2 class="text-yellow-200"> ${tags} </h2>
+        <p>Lanzamiento: ${date}</p>
+      `;
 
-        container.appendChild(div);
-      });
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
+
+      container.appendChild(div);
+
+
+      frame.src = video;
+      frame.width = '500';
+      frame.height = '300';
+      frame.allowFullscreen = true;
+      div.appendChild(frame);
+
+      
     });
-</script>
 
-<div id="container">
-
-</div>
+    </script>
   
- 
+  <div id="container" class="text-white font-serif text-3xl bg-[#111317] flex flex-row justify-center items-center">
 
-<style>
-  #container {
-    width: 100vw;
-    height: 73vh;
-    background-color: blue;
-    color: white;
-   
-
-    & img {
-      float: left;
-    }
-
-    & p{
-      display: flex;
-      flex-direction: column;
-      font-size: 2em;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-  }
-</style>
+  </div>
