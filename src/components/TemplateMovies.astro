@@ -1,43 +1,52 @@
 <script>
- // markdownString = 'coverImage | title | date | tags | video '
-    const markdownString = " https://cineteatrolafalla.alvearmendoza.gob.ar/wp-content/uploads/2023/12/Aquaman-2-Poster-1-900x1125-1.jpg | Aquaman | 2023 | Accion, Multiverso DC | https://drive.google.com/file/d/1fU5rCO8BghqfvRP1uDk6u-0LjsVIpx4i/preview";
-
-    const movies = markdownString.trim().split('\n');
-
-    const container = document.getElementById('container');
-
-    movies.forEach(movieString => {
-      const [coverImage, title, date, tags, video] = movieString.split('|').map(item => item.trim());
-      const div = document.createElement('div');
-      const img = document.createElement('img');
-      const frame = document.createElement('iframe');
-
-      img.src = coverImage;
-      img.alt = "Movie Cover";
-      img.width = 200; 
-      div.appendChild(img);
-
-      div.innerHTML += `
-        <h1>Nombre: ${title}</h1>
-        <h2 class="text-yellow-200"> ${tags} </h2>
-        <p>Lanzamiento: ${date}</p>
-      `;
-
-
-      container.appendChild(div);
-
-
-      frame.src = video;
-      frame.width = '500';
-      frame.height = '300';
-      frame.allowFullscreen = true;
-      div.appendChild(frame);
-
-      
-    });
-
-    </script>
-  
-  <div id="container" class="text-white font-serif text-3xl bg-[#111317] flex flex-row justify-center items-center">
-
-  </div>
+  // markdownString = 'coverImage | title | date | tags | video '
+ const markdownString = ``;
+ 
+ function createDialog(dialogId, markdownString) {
+   const movies = markdownString.trim().split('\n');
+   const container = document.createElement('div');
+   
+   container.style.backgroundColor = "#13151a"
+   container.style.color = "#ffffff"
+   container.style.display = "flex";
+   container.style.flexDirection = "column";
+   container.style.justifyContent = "center";
+   container.style.alignItems = "center";
+ 
+   movies.forEach(movieString => {
+     const [coverImage, title, date, tags, video] = movieString.split('|').map(item => item.trim());
+     const div = document.createElement('div');
+     const img = document.createElement('img');
+     const frame = document.createElement('iframe');
+ 
+     img.src = coverImage;
+     img.alt = "Movie Cover";
+     img.width = 200; 
+     div.appendChild(img);
+ 
+     div.innerHTML += `
+       <h1>Nombre: ${title}</h1>
+       <h2 class="text-yellow-200">${tags}</h2>
+       <p>Lanzamiento: ${date}</p>
+     `;
+ 
+     container.appendChild(div);
+ 
+     frame.src = video;
+     frame.width = '500';
+     frame.height = '300';
+     frame.allowFullscreen = true;
+     div.appendChild(frame);
+   });
+ 
+   const dialog = document.getElementById(dialogId);
+   dialog.appendChild(container);
+ }
+ 
+ createDialog("alert-dialog-hola", markdownString);
+ </script>
+ 
+ <dialog id="alert-dialog-aquaman" class="w-5/6 h-4/5"></dialog>
+ 
+ <dialog id="alert-dialog-hola" class="w-5/6 h-4/5"></dialog>
+ 
