@@ -1,13 +1,17 @@
 <script>
   // markdownString = 'coverImage | title | date | tags | video '
- const aquamanMarkdownString = `https://cineteatrolafalla.alvearmendoza.gob.ar/wp-content/uploads/2023/12/Aquaman-2-Poster-1-900x1125-1.jpg | Aquaman | 2023 | Accion, Multiverso DC | https://drive.google.com/file/d/1fU5rCO8BghqfvRP1uDk6u-0LjsVIpx4i/preview`;
- 
- const holaMarkdownString = `https://example.com/cover.jpg | Hola | 2024 | Ejemplo, Otro Ejemplo | https://example.com/video.mp4`;
+ const markdownString = `https://depor.com/resizer/frYh9JMjTmkI_few0UyKK7WGvCU=/620x0/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/K3ZVO6CHINGL5OWBS45TZM4BRI.jpg | Rapidos Y Furiosos 10 | 2023 | Carreras, Accion | https://drive.google.com/file/d/1fU5rCO8BghqfvRP1uDk6u-0LjsVIpx4i/preview`;
  
  function createDialog(dialogId, markdownString) {
    const movies = markdownString.trim().split('\n');
    const container = document.createElement('div');
    
+   container.style.backgroundColor = "#13151a"
+   container.style.color = "#ffffff"
+   container.style.display = "flex";
+   container.style.flexDirection = "column";
+   container.style.justifyContent = "center";
+   container.style.alignItems = "center";
  
    movies.forEach(movieString => {
      const [coverImage, title, date, tags, video] = movieString.split('|').map(item => item.trim());
@@ -39,8 +43,7 @@
    dialog.appendChild(container);
  }
  
- createDialog("alert-dialog-aquaman", aquamanMarkdownString);
- createDialog("alert-dialog-hola", holaMarkdownString);
+ createDialog("alert-dialog-hola", markdownString);
  </script>
  
  <dialog id="alert-dialog-aquaman" class="w-5/6 h-4/5"></dialog>
