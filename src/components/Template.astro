@@ -1,61 +1,10 @@
 ---
-import Aquaman from "../posts/peliculas/Aquaman.astro";
-import Hola from "../posts/peliculas/hola.astro";
+import BaseLayout from '../layouts/BaseLayout.astro'
+const allPosts = await Astro.glob('../posts/peliculas/*.md');
 ---
-
-<script>
-  // Función para mostrar el diálogo de Aquaman
-  function showAquamanDialog() {
-    const alertDialogAquaman = document.querySelector("#alert-dialog-aquaman");
-    alertDialogAquaman.showModal();
-  }
-
-  // Función para mostrar el diálogo de Hola
-  function showHolaDialog() {
-    const alertDialogHola = document.querySelector("#alert-dialog-hola");
-    alertDialogHola.showModal();
-  }
-
-  // Event listener para el botón de Aquaman
-  document.getElementById("show-button-aquaman").addEventListener("click", showAquamanDialog);
-
-  // Event listener para el botón de Hola
-  document.getElementById("show-button-hola").addEventListener("click", showHolaDialog);
-</script>
-
-<section class="w-[95vw] h-auto m-auto p-5 shadow-2xl shadow-white">
-  <dialog id="alert-dialog-aquaman" class="w-5/6 h-4/5">
-    <Aquaman class="flimComponent"></Aquaman>
-    <button class="text-red-400 text-2xl" onclick="document.querySelector('#alert-dialog-aquaman').close()">X</button>
-  </dialog>
-  
-  <button id="show-button-aquaman">
-    <img src="/public/favicon.png" alt="" class="w-72">
-  </button>
-
-  <dialog id="alert-dialog-hola" class="w-5/6 h-4/5">
-    <Hola class="flimComponent"></Hola>
-    <button class="text-red-400" onclick="document.querySelector('#alert-dialog-hola').close()">X</button>
-  </dialog>
-
-  <button id="show-button-hola">
-    <img src="https://depor.com/resizer/frYh9JMjTmkI_few0UyKK7WGvCU=/620x0/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/K3ZVO6CHINGL5OWBS45TZM4BRI.jpg" alt="" class="w-72">
-  </button>
-
-</section>
-
-<style>
-  #alert-dialog-aquaman::backdrop, #alert-dialog-hola::backdrop {
-    background: linear-gradient(#000d, #000a);
-  }
-
-  .flimComponent {
-    background-color: black;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-</style>
-
+<BaseLayout>
+  <p>Aquí es donde publicaré sobre mi viaje de aprendizaje de Astro.</p>
+  <ul>
+    {allPosts.map((post) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}
+  </ul>
+</BaseLayout>
