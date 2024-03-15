@@ -1,5 +1,6 @@
 ---
 const pageTitle = "Página de inicio";
+const allPosts = await Astro.glob('../posts/peliculas/*.md');
 ---
 <html lang="es">
   <head>
@@ -10,6 +11,11 @@ const pageTitle = "Página de inicio";
     <title>{pageTitle}</title>
   </head>
   <body>
-    <h1>{pageTitle}</h1>
+    <ul>
+      {allPosts.map((post) => 
+      <li>
+      <a href={post.frontmatter.video}>{post.frontmatter.title}</a>
+      </li>)}
+    </ul>
   </body>
 </html>
