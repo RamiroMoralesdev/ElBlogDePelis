@@ -3,30 +3,33 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
 ---
 
 <script>
+  // Obtén todos los botones de mostrar
+  const showButtons = document.querySelectorAll(".show-button");
 
-  const showButton = document.querySelector("#show");
-
-showButton.addEventListener("click", function () {
-  const alertDialog = document.querySelector("#alert-dialog");
-  alertDialog.showModal();
-})
-
+  // Itera sobre cada botón y agrega un listener de eventos
+  showButtons.forEach((button, index) => {
+    button.addEventListener("click", function () {
+      // Encuentra el diálogo asociado usando el índice del botón
+      const alertDialog = document.querySelector(`#alert-dialog-${index}`);
+      alertDialog.showModal();
+    });
+  });
 </script>
 
-<style>
-#alert-dialog::backdrop {
-  background: linear-gradient(#000d, #000a);
-}
+...
 
-</style>
-
-    <ul class=" w-10/12 h-auto text-white shadow-2xl shadow-white m-auto flex gap-8">
-      {allPosts.map((post) => 
-      <li>
- 
-        <dialog id="alert-dialog" class="w-4/5 h-auto bg-[#13151a] text-white">
-          
-          <img src={post.frontmatter.image.url} alt={post.frontmatter.title} class="w-48">
+<ul class=" w-10/12 h-auto text-white shadow-2xl shadow-white m-auto flex gap-8">
+  {allPosts.map((post, index) => (
+    <li>
+      {/* Cada botón de mostrar tendrá una clase común y un atributo de identificación de datos */}
+      <img src={post.frontmatter.image.url} alt={post.frontmatter.image.alt} 
+           class="w-56 show-button" data-index={index}>
+  
+      {/* Cada diálogo tendrá un identificador único basado en el índice */}
+      <dialog id={`alert-dialog-${index}`} class="w-4/5 h-auto bg-[#13151a] text-white scrollbar">
+        <button onClick="this.parentElement.close()" class="text-2xl text-red-500">X</button>
+        
+        <img src={post.frontmatter.image.url} alt={post.frontmatter.title} class="w-48">
           <h1>{post.frontmatter.title}</h1>
           <h2>{post.frontmatter.date}</h2>
           <p>{post.frontmatter.description}</p>
@@ -35,10 +38,7 @@ showButton.addEventListener("click", function () {
           </p>
           <iframe src={post.frontmatter.video} allowfullscreen width="600px" height="600px"></iframe>
 
-          </dialog>
-
-      <img src={post.frontmatter.image.url} alt={post.frontmatter.image.alt} id="show" class="w-56">
-      </li>)
-
-      }
-    </ul>
+      </dialog>
+    </li>
+  ))}
+  </ul>
