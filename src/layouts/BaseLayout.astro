@@ -2,15 +2,43 @@
 const allPosts = await Astro.glob('../posts/peliculas/*.md');
 ---
 
+<script>
+
+  const showButton = document.querySelector("#show");
+
+showButton.addEventListener("click", function () {
+  const alertDialog = document.querySelector("#alert-dialog");
+  alertDialog.showModal();
+})
+
+</script>
+
 <style>
-  img {
-    width: 300px;
-  }
+#alert-dialog::backdrop {
+  background: linear-gradient(#000d, #000a);
+}
+
 </style>
 
     <ul class=" w-10/12 h-auto text-white shadow-2xl shadow-white m-auto flex gap-8">
       {allPosts.map((post) => 
       <li>
-      <img src={post.frontmatter.image.url}>
-      </li>)}
+ 
+        <dialog id="alert-dialog" class="w-4/5 h-auto bg-[#13151a] text-white">
+          
+          <img src={post.frontmatter.image.url} alt={post.frontmatter.title} class="w-48">
+          <h1>{post.frontmatter.title}</h1>
+          <h2>{post.frontmatter.date}</h2>
+          <p>{post.frontmatter.description}</p>
+          <p>
+            <mark>{post.frontmatter.tags}</mark>
+          </p>
+          <iframe src={post.frontmatter.video} allowfullscreen width="600px" height="600px"></iframe>
+
+          </dialog>
+
+      <img src={post.frontmatter.image.url} alt={post.frontmatter.image.alt} id="show" class="w-56">
+      </li>)
+
+      }
     </ul>
