@@ -2,10 +2,10 @@
 layout: ../../layouts/TemplateMarkdown.astro
 title: Aquaman
 date: 2023
-description: "Esta entrada aparecerá sola!"
+description: "Descripcion"
 image:
-  url: "https://depor.com/resizer/frYh9JMjTmkI_few0UyKK7WGvCU=/620x0/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/K3ZVO6CHINGL5OWBS45TZM4BRI.jpg"
+  url: "https://upload.wikimedia.org/wikipedia/en/4/4a/Aquaman_and_the_Lost_Kingdom_poster.jpg"
   alt: title
-tags: ["Carreras", "Accion"]
+tags: ["Carreras", " Accion"]
 video: "video.mp4"
 ---
