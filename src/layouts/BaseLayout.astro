@@ -18,7 +18,7 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
 
 ...
 
-<ul class=" w-10/12 h-auto text-white shadow-2xl shadow-white m-auto flex gap-8">
+<ul class=" w-10/12 h-auto text-white shadow-2xl shadow-white m-auto flex gap-8 flex-row-reverse">
   {allPosts.map((post, index) => (
     <li>
 
