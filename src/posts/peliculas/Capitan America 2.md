@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/TemplateMarkdown.astro
-title: Capitan America 2 El Soldado Del Invierno
+title: Capitan America 2 Y El Soldado Del Invierno
 date: 2014
 description: "Capitán América, Black Widow y un nuevo aliado, Falcon, se enfrentan a un enemigo inesperado mientras intentan exponer una conspiración que pone en riesgo al mundo."
 image:
