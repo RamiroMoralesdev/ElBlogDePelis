@@ -9,7 +9,7 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
   // Itera sobre cada botón y agrega un listener de eventos
   showButtons.forEach((button, index) => {
     button.addEventListener("click", function () {
-      // Encuentra el diálogo asociado usando el índice del botón
+      // Encuentra el diálogo asociado usando el índice del showbutton
       const alertDialog = document.querySelector(`#alert-dialog-${index}`);
       alertDialog.showModal();
     });
@@ -23,7 +23,7 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
     <li>
 
       <img src={post.frontmatter.image.url} alt={post.frontmatter.image.alt} 
-           class="show-button w-56 cursor-pointer" data-index={index}>
+           class="show-button w-56 cursor-pointer" title={post.frontmatter.description} data-index={index}>
 
       <dialog id={`alert-dialog-${index}`} class="w-4/5 h-auto bg-[#13151a] text-white scrollbar">
         <button onClick="this.parentElement.close()" class="text-2xl text-red-500">X</button>
@@ -31,10 +31,8 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
         <img src={post.frontmatter.image.url} alt={post.frontmatter.title} class="w-48">
           <h1>{post.frontmatter.title}</h1>
           <h2>{post.frontmatter.date}</h2>
-          <p>{post.frontmatter.description}</p>
-          <p>
-            <mark>{post.frontmatter.tags}</mark>
-          </p>
+          <p id="description"> {post.frontmatter.description}</p>
+          <p> <mark>{post.frontmatter.tags}</mark> </p>
           <iframe src={post.frontmatter.video} allowfullscreen width="640" height="480"></iframe>
 
       </dialog>
