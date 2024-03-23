@@ -1,17 +1,7 @@
-<div>
-    
-    <div class="w-screen text-center sticky top-0">
-        <img src="/public/favicon.png" alt="Logotipo de El Blog De Pelis" class="w-20 absolute left-8 top-7">
-
-        <!--  ! IMPORTANTE. Al desplegar cambiar el action al dominio real -->
-        <form action="https://elblogdepelis.vercel.app/" method="get">
-            <input type="search" placeholder="Buscador por palabras clave" class="w-4/6 h-10 bg-black text-white mt-10 shadow-sm shadow-emerald-300 placeholder:text-neutral-400 placeholder:text-xl">
-        
-        </form>
-
-
-    </div>
-
+---
+import Search from "../components/Search.astro";
+---
+    <Search></Search>
      <section id="movies" class="text-white text-3xl font-extrabold w-screen mt-10 mb-20 flex justify-around">
         <button class=" bg-emerald-400 w-40 h-16  hover:bg-yellow-500 ">
             <a class="" href="#">Peliculas</a>
