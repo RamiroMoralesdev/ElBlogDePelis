@@ -18,12 +18,12 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
 
 ...
 
-<ul class=" w-10/12 h-auto text-white shadow-2xl shadow-white m-auto flex gap-8 flex-row-reverse flex-wrap">
+<ul class=" w-10/12 h-auto text-white shadow-2xl shadow-white mx-auto flex flex-row flex-wrap justify-between items-center">
   {allPosts.map((post, index) => (
     <li>
 
       <img src={post.frontmatter.image.url} alt={post.frontmatter.image.alt} 
-           class="show-button w-56 cursor-pointer" title={post.frontmatter.description} data-index={index}>
+           class="show-button w-56 cursor-pointer m-2" title={post.frontmatter.description} data-index={index}>
 
       <dialog id={`alert-dialog-${index}`} class="w-4/5 h-auto bg-[#13151a] text-white scrollbar">
         <button onClick="this.parentElement.close()" class="text-2xl text-red-500">X</button>
