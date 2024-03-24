@@ -14,6 +14,8 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
       alertDialog.showModal();
     });
   });
+
+  
 </script>
 
 ...
@@ -25,17 +27,33 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
       <img src={post.frontmatter.image.url} alt={post.frontmatter.image.alt} 
            class="show-button w-56 cursor-pointer m-2" title={post.frontmatter.description} data-index={index}>
 
-      <dialog id={`alert-dialog-${index}`} class="w-4/5 h-auto bg-[#13151a] text-white scrollbar">
+      <dialog id={`alert-dialog-${index}`} class="w-4/5 h-auto bg-[#13151a] text-white">
         <button onClick="this.parentElement.close()" class="text-2xl text-red-500">X</button>
+
+        <section class=" w-full h-full flex flex-row">
         
-        <img src={post.frontmatter.image.url} alt={post.frontmatter.title} class="w-48">
+        <div class="w-6/12 flex flex-col">
+        <img src={post.frontmatter.image.url} alt={post.frontmatter.title} class="w-full h-auto">
+        <p class="mt-5 text-2xl"> <mark>{post.frontmatter.tags}</mark> </p>
+        </div>
+
+        <div class="text-balance ml-10">
           <h1>{post.frontmatter.title}</h1>
           <h2>{post.frontmatter.date}</h2>
           <p> {post.frontmatter.description}</p>
-          <p> <mark>{post.frontmatter.tags}</mark> </p>
-          <iframe src={post.frontmatter.video} allowfullscreen width="640" height="480" loading="lazy" title={post.frontmatter.title}></iframe>
-
+          <iframe id="video" src={post.frontmatter.video} allowfullscreen width="640" height="480" loading="lazy" title={post.frontmatter.title} class="mt-10" ></iframe>
+        </div>
+      
+      </section>
       </dialog>
     </li>
   ))}
   </ul>
+
+  <script>
+    import videojs from 'video.js'
+
+    let reproductor = videojs('video', {
+      fluid: true
+    })
+</script>
