@@ -26,7 +26,7 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
       <img src={post.frontmatter.image.url} alt={post.frontmatter.image.alt} 
            class="show-button w-56 cursor-pointer m-2" title={post.frontmatter.title + "\n" + post.frontmatter.description} data-index={index}>
 
-      <dialog id={`alert-dialog-${index}`} class="w-4/5 h-auto bg-[#13151a] text-white">
+      <dialog id={`alert-dialog-${index}`} class="w-4/5 h-full bg-[#13151a] text-white">
         <button onClick="this.parentElement.close()" class="text-2xl text-red-500">X</button>
 
         <section class=" w-full h-full flex flex-row">
@@ -40,7 +40,7 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
           <h1>{post.frontmatter.title}</h1>
           <h2>{post.frontmatter.date}</h2>
           <p> {post.frontmatter.description}</p>
-          <iframe id="video" src={post.frontmatter.video} allowfullscreen width="640" height="480" loading="lazy" title={post.frontmatter.title} class="mt-10" ></iframe>
+          <iframe id="video" src={post.frontmatter.video} allowfullscreen width="640" height="480" loading="lazy" title={post.frontmatter.title} class="mt-10 w-3/4 h-auto" ></iframe>
         </div>
       
       </section>
@@ -48,3 +48,9 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
     </li>
   ))}
   </ul>
+
+  <style>
+    dialog::backdrop {
+      background: linear-gradient(#000d, #000a);
+    }
+    </style>
