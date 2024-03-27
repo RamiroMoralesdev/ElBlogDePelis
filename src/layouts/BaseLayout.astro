@@ -25,7 +25,7 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
            class="show-button w-56 cursor-pointer m-2" title={post.frontmatter.title + "\n" + post.frontmatter.description} data-index={index}>
 
       <dialog id={`alert-dialog-${index}`} class="w-4/5 h-full bg-[#13151a] text-white">
-        <button onClick="this.parentElement.close()" class="text-2xl text-red-500">X</button>
+        <button onClick="this.parentElement.close()" class="text-3xl text-[#13151a] bg-emerald-500 fixed top-5 left-5 hover:text-red-500 hover:scale-150">X</button>
 
         <section class=" w-full h-full flex flex-row">
         
