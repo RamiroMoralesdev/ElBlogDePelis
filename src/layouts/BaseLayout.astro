@@ -14,6 +14,13 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
       alertDialog.showModal();
     });
   });
+
+  // Precargar imagenes en cache
+  function preload(image, url) {
+  fetch(url).then(request => request.blob()).then(() => {
+    image.src = url;
+  });
+}
   
 </script>
 
