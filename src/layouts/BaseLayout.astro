@@ -15,6 +15,14 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
     });
   });
 
+  // const iframe = document.getElementById('video');
+  // const loadingImage = document.getElementById('loading-image');
+
+  //   iframe.addEventListener('load', function() {
+  //   loadingImage.style.display = 'none';
+  //   iframe.style.display = 'block';
+  // });
+  
   // Precargar imagenes en cache
   function preload(image, url) {
   fetch(url).then(request => request.blob()).then(() => {
@@ -45,7 +53,12 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
           <h1>{post.frontmatter.title}</h1>
           <h2>{post.frontmatter.date}</h2>
           <p> {post.frontmatter.description}</p>
-          <iframe id="video" src={post.frontmatter.video} allowfullscreen width="640" height="480" loading="lazy" title={post.frontmatter.title} class="mt-10 w-3/4 h-auto" ></iframe>
+
+          <div class="iframe-container">
+            <!-- <img id="loading-image" src={post.frontmatter.image.url} alt="Loading..." />  -->
+            <iframe id="video" src={post.frontmatter.video} allowfullscreen width="640" height="480" loading="lazy" title={post.frontmatter.title}   class="mt-10 w-3/4 h-auto" ></iframe>
+        </div>
+
         </div>
       
       </section>
