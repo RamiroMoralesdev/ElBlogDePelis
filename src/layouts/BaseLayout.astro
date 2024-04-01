@@ -15,6 +15,17 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
     });
   });
 
+  
+  const video = document.getElementById('video')
+  const btnClose = this.alertDialog.close
+
+  btnClose.addEventListener("click", () => {
+  // Pausa el video
+  video.pause();
+});
+
+  
+
   // const iframe = document.getElementById('video');
   // const loadingImage = document.getElementById('loading-image');
 
