@@ -6,5 +6,5 @@ description: "Tras la muerte de su madre, Rafael decide irse de Cuba y viajar a 
 image:
   url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNG0XxZutjdQ7cbRKEFRDF3U97Z8_PUPi-bnupc-YyLfbmGYr3"
 tags: ["Drama", " Romance"]
-video: "//ok.ru/videoembed/7452864678575"
+video: "https://drive.google.com/file/d/1ahqdKGHl5ZcMOUmdsuYS1kTDTbcOLe5c/preview"
 ---
