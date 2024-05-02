@@ -57,17 +57,17 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
         
         <div class="w-6/12 flex flex-col">
         <img src={post.frontmatter.image.url} alt={post.frontmatter.title} class="w-full max-w-[220px] h-auto">
-        <p class="mt-5 text-2xl"> <mark>{post.frontmatter.tags}</mark> </p>
+        <p class="mt-5 text-base">{post.frontmatter.tags}</p>
         </div>
 
-        <div class="text-balance ml-10">
+        <div class="text-balance ml-12">
           <h1 class="uppercase">{post.frontmatter.title}</h1>
           <h2>{post.frontmatter.date}</h2>
           <p> {post.frontmatter.description}</p>
 
           <div class="iframe-container">
             <!-- <img id="loading-image" src={post.frontmatter.image.url} alt="Loading..." />  -->
-            <iframe id="video" src={post.frontmatter.video} allowfullscreen width="640" height="480" loading="lazy" title={post.frontmatter.title}   class="mt-10 w-3/4 h-auto" ></iframe>
+            <iframe id="video" src={post.frontmatter.video} allowfullscreen width="640" height="480" loading="lazy" title={post.frontmatter.title}   class="mt-10 w-3/4" ></iframe>
         </div>
 
         </div>
