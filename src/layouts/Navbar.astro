@@ -1,24 +1,34 @@
 ---
 import Search from "../components/Search.astro";
 ---
+<nav class="w-full h-fit">
+
+
 <div class="w-full flex justify-center items-center">
     <Search></Search>
 </div>
 
-     <section id="movies" class="text-white text-3xl font-extrabold w-screen mt-10 mb-20 flex justify-around">
-        <button class=" bg-emerald-400 w-40 h-16  hover:bg-yellow-500 ">
-            <a class="" href="#">Peliculas</a>
-        </button>
 
-        <button id="series" class=" bg-emerald-400 w-40 h-16  hover:bg-yellow-500">
+<div class="categories flex justify-center items-center">
+    <button id="categoryToggle" class="md:hidden bg-yellow-500 w-12 h-16  text-white text-3xl font-extrabold">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+        </svg>
+    </button>
+    <section id="categoryMenu" class="hidden md:flex text-white text-3xl font-extrabold w-screen mt-10 mb-20 flex-col md:flex-row justify-around">
+        <button class="bg-emerald-400 w-full md:w-40 h-16 hover:bg-yellow-500 mb-2 md:mb-0">
+            <a href="#">Películas</a>
+        </button>
+        <button id="series" class="bg-emerald-400 w-full md:w-40 h-16 hover:bg-yellow-500 mb-2 md:mb-0">
             <a href="#">Series</a>
         </button>
-
-        <button id="genres" class=" bg-emerald-400 w-40 h-16  hover:bg-yellow-500">
-            <a href="#">Generos</a>
+        <button id="genres" class="bg-emerald-400 w-full md:w-40 h-16 hover:bg-yellow-500">
+            <a href="#">Géneros</a>
         </button>
-     </section>
+    </section>
 </div>
+
+</nav>
 
 <script>
 
@@ -26,6 +36,22 @@ import Search from "../components/Search.astro";
     const btnMovies = document.getElementById("movies");
     const btnGenrees = document.getElementById("genres");
 
+    const categoryToggle = document.getElementById('categoryToggle');
+    const categoryMenu = document.getElementById('categoryMenu');
+
+    categoryToggle.addEventListener('click', () => {
+        categoryMenu.classList.toggle('hidden');
+        categoryToggle.classList.toggle('d-block');
+    });
+
+    // Asegurarse de que el menú se muestre correctamente al cambiar el tamaño de la ventana
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+            categoryMenu.classList.remove('hidden');
+        } else {
+            categoryMenu.classList.add('hidden');
+        }
+    });
 
     btnSeries.addEventListener("click", function() {
     btnSeries.textContent = "Proximamente!";
