@@ -1,3 +1,23 @@
-<input type="search" placeholder="Buscador" id="inputBusqueda" class="w-4/6 h-10 mx-0 my-auto bg-black text-white mt-10 shadow-sm shadow-emerald-300 placeholder:text-neutral-400 placeholder:text-xl" />
-<button type="submit" class="text-white">OK</button>
-
+<div class="search-container w-full">
+    <input type="search" placeholder="Buscador" id="inputBusqueda" class="w-full h-10 mx-0 my-auto bg-black text-white mt-10 shadow-sm shadow-emerald-300 placeholder:text-neutral-400 placeholder:text-xl" />
+    <button type="button" id="btnBuscar" class="text-white">OK</button>
+  </div>
+  
+  <script>
+    const inputBusqueda = document.getElementById('inputBusqueda');
+    const btnBuscar = document.getElementById('btnBuscar');
+  
+    function realizarBusqueda() {
+      const terminoBusqueda = inputBusqueda.value.toLowerCase();
+      const evento = new CustomEvent('buscar', { detail: terminoBusqueda });
+      document.dispatchEvent(evento);
+    }
+  
+    inputBusqueda.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        realizarBusqueda();
+      }
+    });
+  
+    btnBuscar.addEventListener('click', realizarBusqueda);
+  </script>

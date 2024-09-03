@@ -1,51 +1,13 @@
 ---
 const allPosts = await Astro.glob('../posts/peliculas/*.md');
 ---
+<script src="./app.js"></script>
 
-<script>
-  
-  const showButtons = document.querySelectorAll(".show-button");
 
-  // Itera sobre cada botón y agrega un listener de eventos
-  showButtons.forEach((button, index) => {
-    button.addEventListener("click", function () {
-      // Encuentra el diálogo asociado usando el índice del showbutton
-      const alertDialog = document.querySelector(`#alert-dialog-${index}`);
-      alertDialog.showModal();
-    });
-  });
 
-  
-  const video = document.getElementById('video')
-  const btnClose = this.alertDialog.close
-
-  btnClose.addEventListener("click", () => {
-  // Pausa el video
-  video.pause();
-});
-
-  
-
-  // const iframe = document.getElementById('video');
-  // const loadingImage = document.getElementById('loading-image');
-
-  //   iframe.addEventListener('load', function() {
-  //   loadingImage.style.display = 'none';
-  //   iframe.style.display = 'block';
-  // });
-  
-  // Precargar imagenes en cache
-  function preload(image, url) {
-  fetch(url).then(request => request.blob()).then(() => {
-    image.src = url;
-  });
-}
-  
-</script>
-
-<ul class=" w-10/12 h-auto text-white shadow-2xl shadow-white mx-auto flex flex-row flex-wrap justify-between items-center">
+<ul id="listPosts" class=" w-10/12 h-auto text-white shadow-2xl shadow-white mx-auto flex flex-row flex-wrap justify-between items-center">
   {allPosts.map((post, index) => (
-    <li>
+    <li class="post-item">
 
       <img src={post.frontmatter.image.url} alt={post.frontmatter.image.alt} 
            class="show-button w-56 cursor-pointer m-2" title={post.frontmatter.title + "\n" + post.frontmatter.description} data-index={index}>
