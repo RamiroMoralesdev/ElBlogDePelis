@@ -1,43 +1,46 @@
 ---
 const allPosts = await Astro.glob('../posts/peliculas/*.md');
 ---
-<script src="./app.js"></script>
+<html>
+<head>
+  <script src="./app.js"></script>
+</head>
+<body>
+
+  <ul id="listPosts" class=" w-10/12 h-auto text-white shadow-2xl shadow-white mx-auto flex flex-row flex-wrap justify-between items-center">
+    {allPosts.map((post, index) => (
+      <li class="post-item">
+
+        <img src={post.frontmatter.image.url} alt={post.frontmatter.image.alt} 
+             class="show-button w-56 cursor-pointer m-2" title={post.frontmatter.title + "\n" + post.frontmatter.description} data-index={index}>
+
+        <dialog id={`alert-dialog-${index}`} class="w-4/5 h-full bg-[#13151a] text-white">
+          <button class="text-3xl text-[#13151a] bg-emerald-500 fixed top-5 left-5 hover:text-red-500 hover:scale-150">X</button>
 
 
+          <section class=" w-full h-full flex flex-row">
+          
+          <div class="w-6/12 flex flex-col">
+          <img src={post.frontmatter.image.url} alt={post.frontmatter.title} class="w-full max-w-[220px] h-auto">
+          <p class="mt-5 text-base">{post.frontmatter.tags}</p>
+          </div>
 
-<ul id="listPosts" class=" w-10/12 h-auto text-white shadow-2xl shadow-white mx-auto flex flex-row flex-wrap justify-between items-center">
-  {allPosts.map((post, index) => (
-    <li class="post-item">
+          <div class="text-balance ml-12">
+            <h1 class="uppercase">{post.frontmatter.title}</h1>
+            <h2>{post.frontmatter.date}</h2>
+            <p> {post.frontmatter.description}</p>
 
-      <img src={post.frontmatter.image.url} alt={post.frontmatter.image.alt} 
-           class="show-button w-56 cursor-pointer m-2" title={post.frontmatter.title + "\n" + post.frontmatter.description} data-index={index}>
+            <div class="iframe-container">
+              <!-- <img id="loading-image" src={post.frontmatter.image.url} alt="Loading..." />  -->
+              <iframe id="video" src={post.frontmatter.video} allowfullscreen width="640" height="480" loading="lazy" title={post.frontmatter.title}   class="mt-10 w-3/4" ></iframe>
+          </div>
 
-      <dialog id={`alert-dialog-${index}`} class="w-4/5 h-full bg-[#13151a] text-white">
-        <button onClick="this.parentElement.close()" class="text-3xl text-[#13151a] bg-emerald-500 fixed top-5 left-5 hover:text-red-500 hover:scale-150">X</button>
-
-        <section class=" w-full h-full flex flex-row">
+          </div>
         
-        <div class="w-6/12 flex flex-col">
-        <img src={post.frontmatter.image.url} alt={post.frontmatter.title} class="w-full max-w-[220px] h-auto">
-        <p class="mt-5 text-base">{post.frontmatter.tags}</p>
-        </div>
-
-        <div class="text-balance ml-12">
-          <h1 class="uppercase">{post.frontmatter.title}</h1>
-          <h2>{post.frontmatter.date}</h2>
-          <p> {post.frontmatter.description}</p>
-
-          <div class="iframe-container">
-            <!-- <img id="loading-image" src={post.frontmatter.image.url} alt="Loading..." />  -->
-            <iframe id="video" src={post.frontmatter.video} allowfullscreen width="640" height="480" loading="lazy" title={post.frontmatter.title}   class="mt-10 w-3/4" ></iframe>
-        </div>
-
-        </div>
-      
-      </section>
-      </dialog>
-    </li>
-  ))}
+        </section>
+        </dialog>
+      </li>
+    ))}
   </ul>
 
   <style>
@@ -45,3 +48,7 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
       background: linear-gradient(#000d, #000a);
     }
     </style>
+
+  
+</body>
+</html>

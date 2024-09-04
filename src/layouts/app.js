@@ -8,9 +8,37 @@ document.addEventListener('DOMContentLoaded', () => {
         alertDialog.showModal();
       });
     });
+
+
+    window.onload = function() {
+      window.cerrarYPausar = function(boton) {
+        const dialogo = boton.closest('dialog');
+        const iframe = dialogo.querySelector('iframe');
+        
+        if (iframe) {
+          // Guardamos la URL actual del iframe
+          const currentSrc = iframe.src;
+          
+          iframe.src = '';
+          // Restauramos el src después un Timeout
+          setTimeout(() => {
+            iframe.src = currentSrc;
+          }, 10);
+        }
+    
+        dialogo.close();
+      }
+
+  
+      document.querySelectorAll('dialog button').forEach(button => {
+        button.addEventListener('click', function() {
+          cerrarYPausar(this);
+        });
+      });
+    };
   
     const video = document.getElementById('video')
-    // Corrige esta línea:
+    
     const btnClose = document.querySelector('#tuBotonDeCerrar'); // Ajusta el selector
   
     if (btnClose) {
