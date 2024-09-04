@@ -1,3 +1,5 @@
+import LogoText from "../components/LogoText.astro";
+
 document.addEventListener('DOMContentLoaded', () => {
     const showButtons = document.querySelectorAll(".show-button");
   
@@ -58,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('buscar', (evento) => {
       const terminoBusqueda = evento.detail.toLowerCase();
       const listaPosts = document.getElementById('listPosts');
+      const logoText = document.getElementById('logoText');
+      
       if (listaPosts) {
         const posts = listaPosts.querySelectorAll('.post-item');
   
@@ -70,5 +74,17 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       }
+
+      // Actualizar el texto del logo
+      if (logoText) {
+        logoText.textContent = 'Resultados de la búsqueda para: ' + terminoBusqueda || "el blog de pelis";
+        logoText.style.fontSize = "2rem";
+        logoText.style.textAlign = "center";
+        logoText.style.transition = "all 1s";
+      }
     });
   });
+
+
+
+  
