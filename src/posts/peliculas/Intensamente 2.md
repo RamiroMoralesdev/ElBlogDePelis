@@ -7,5 +7,5 @@ image:
     url: 'https://lumiere-a.akamaihd.net/v1/images/1_intensamente_2_payoff_banner_pre_1_aa3d9114.png' 
     alt: 'Intensamente 2'
 tags: ["Animación", "Comedia", "Familiar"]
-video: "https://drive.google.com/file/d/1gcvQxZG5UHTxjgpTXqKqAe091SdL_bGk/view?usp=drive_link"
+video: "https://drive.google.com/file/d/1gcvQxZG5UHTxjgpTXqKqAe091SdL_bGk/preview"
 ---

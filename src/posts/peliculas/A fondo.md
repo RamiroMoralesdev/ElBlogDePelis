@@ -7,5 +7,5 @@ image:
     url: 'https://www.lavanguardia.com/peliculas-series/images/movie/poster/2024/8/w1280/uNOJ1JrzkLnOCNQRlmxzc1m8ApB.jpg' 
     alt: 'A fondo - Carreras de motos'
 tags: ["Deportes", "Acción", "Drama"]
-video: "https://drive.google.com/file/d/1PaU1c892N7kDGmo_X4ClgQBLeiY2yyL8/view?usp=sharing"
+video: "https://drive.google.com/file/d/1PaU1c892N7kDGmo_X4ClgQBLeiY2yyL8/preview"
 ---
