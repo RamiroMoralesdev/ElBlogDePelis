@@ -1,83 +1,61 @@
 ---
-const allPosts = await Astro.glob('../posts/peliculas/*.md');
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
 
-// API WORDPRESS
-// Función para obtener posts de WordPress
-// async function getWordPressPosts() {
-//   const res = await fetch("http://pruebita.local/wp-json/wp/v2/posts?per_page=10&orderby=date&order=desc&_embed");
-//   return await res.json();
-// }
-// Esta es la API de prueba
+const mdPosts = await Astro.glob('../posts/peliculas/*.md');
 
-// Obtener los posts más recientes de WordPress
-// const posts = await getWordPressPosts();
+// Obtener posts de Keystatic
+const reader = createReader(process.cwd(), keystaticConfig);
+const keystaticPosts = await reader.collections.posts.all();
 
-
+const allPosts = [...mdPosts, ...keystaticPosts].sort((a, b) => {
+  const dateA = a.frontmatter ? new Date(a.frontmatter.fecha) : new Date(a.entry.fecha);
+  const dateB = b.frontmatter ? new Date(b.frontmatter.fecha) : new Date(b.entry.fecha);
+  return dateB.getTime() - dateA.getTime();
+});
 ---
 <html>
 <head>
   <script src="./app.js"></script>
 </head>
 <body>
+  <ul id="listPosts" class="w-10/12 h-auto text-white shadow-2xl shadow-white mx-auto flex flex-row flex-wrap justify-between items-center">
+    {allPosts.map((post, index) => {
+      const isMarkdown = 'frontmatter' in post;
+      const title = isMarkdown ? post.frontmatter.title : post.entry.title;
+      const description = isMarkdown ? post.frontmatter.description : post.entry.description;
+      const fecha = isMarkdown ? post.frontmatter.date : post.entry.fecha;
+      const video = isMarkdown ? post.frontmatter.video : post.entry.video;
+      const image = isMarkdown ? post.frontmatter.image.url : post.entry.image;
 
-
-  {/* API WORDPRESS
-  <section class="text-white">
-    <h1>WordPress</h1>
-    <ul id="listPosts-wp" class=" w-10/12 h-auto text-white shadow-2xl shadow-white mx-auto flex flex-row flex-wrap justify-between items-center">
-      {posts.map((post, index) => (
+      return (
         <li class="post-item">
-          <a href="#" class="show-button" data-index={index}>
-            <img src={post._embedded['wp:featuredmedia'][0].source_url} alt={post.title.rendered} class="w-full h-10">
-          </a>
-          
+          <img src={image} alt={title} 
+               class="show-button w-56 cursor-pointer m-2" title={`${title}\n${description}`} data-index={index}>
+
           <dialog id={`alert-dialog-${index}`} class="w-4/5 h-full bg-[#13151a] text-white">
-            <button class="text-3xl text-[#13151a] bg-emerald-500 fixed top-5 left-5 hover:text-red-500 hover:scale-150">X</button>
-            
-            <h1>{post.title.rendered}</h1>
-            <Fragment set:html={post.excerpt.rendered} />
-          </dialog>
-        </li>
-      ))}
-    </ul>
-  </section>
-  */}
-
-
-
-
-
-  <ul id="listPosts" class=" w-10/12 h-auto text-white shadow-2xl shadow-white mx-auto flex flex-row flex-wrap justify-between items-center">
-    {allPosts.map((post, index) => (
-      <li class="post-item">
-
-        <img src={post.frontmatter.image.url} alt={post.frontmatter.image.alt} 
-             class="show-button w-56 cursor-pointer m-2" title={post.frontmatter.title + "\n" + post.frontmatter.description} data-index={index}>
-
-        <dialog id={`alert-dialog-${index}`} class="w-4/5 h-full bg-[#13151a] text-white">
           <button class="text-3xl text-[#13151a] bg-emerald-500 fixed top-5 left-5 hover:text-red-500 hover:scale-150">X</button>
-
 
           <section class=" w-full h-full flex flex-row">
           
           <div class="w-6/12 flex flex-col">
-          <img src={post.frontmatter.image.url} alt={post.frontmatter.title} class="w-full max-w-[220px] h-auto">
-          <p class="mt-5 text-base">{post.frontmatter.tags}</p>
+          <img src={image} alt={title} class="w-full max-w-[220px] h-auto">
+          <p class="mt-5 text-base">{isMarkdown ? post.frontmatter.tags : post.entry.tags}</p>
           </div>
 
           <div class="text-balance ml-12">
-            <h1 class="uppercase">{post.frontmatter.title}</h1>
-            <h2>{post.frontmatter.date}</h2>
-            <p> {post.frontmatter.description}</p>
+            <h1 class="uppercase">{title}</h1>
+            <h2>{fecha}</h2>
+            <p>{description}</p>
 
             <div class="video-container w-full h-1/2">
               <iframe 
                 id={`video-${index}`} 
-                src={post.frontmatter.video} 
+                src={video} 
                 class="mt-10 w-3/4 h-full" 
                 allowfullscreen 
                 loading="lazy"
-                title={post.frontmatter.title}
+                title={title}
               ></iframe>
             </div>
 
@@ -86,15 +64,13 @@ const allPosts = await Astro.glob('../posts/peliculas/*.md');
         </section>
         </dialog>
       </li>
-    ))}
+    )})}
   </ul>
 
   <style>
     dialog::backdrop {
       background: linear-gradient(#000d, #000a);
     }
-    </style>
-
-  
+  </style>
 </body>
 </html>
