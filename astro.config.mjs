@@ -1,4 +1,6 @@
 import { defineConfig } from 'astro/config';
+import vercel from '@astrojs/vercel';
+
 
 import tailwind from "@astrojs/tailwind";
 
@@ -9,5 +11,6 @@ import Keystatic from '@keystatic/astro'
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), react(), markdoc(), Keystatic()],
-  output: 'hybrid'
+  output: 'server',
+  adapter: vercel()
 });
