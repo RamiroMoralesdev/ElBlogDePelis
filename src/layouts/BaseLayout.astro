@@ -8,10 +8,11 @@ const mdPosts = await Astro.glob('../posts/peliculas/*.md');
 const reader = createReader(process.cwd(), keystaticConfig);
 const keystaticPosts = await reader.collections.posts.all();
 
+// Foreach de los posts de los .md en local y de keystatic
 const allPosts = [...mdPosts, ...keystaticPosts].sort((a, b) => {
   const dateA = a.frontmatter ? new Date(a.frontmatter.fecha) : new Date(a.entry.fecha);
   const dateB = b.frontmatter ? new Date(b.frontmatter.fecha) : new Date(b.entry.fecha);
-  return dateB.getTime() - dateA.getTime();
+  return dateB.getTime() - dateA.getTime(); // Devuelve por  orden descendente 
 });
 ---
 <html>
