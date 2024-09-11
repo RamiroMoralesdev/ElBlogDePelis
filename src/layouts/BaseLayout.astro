@@ -40,7 +40,7 @@ const allPosts = [...mdPosts, ...keystaticPosts].sort((a, b) => {
           <section class=" w-full h-full flex flex-row">
           
           <div class="w-6/12 flex flex-col">
-          <img src={image} alt={title} class="w-full max-w-[220px] h-auto">
+          <img src={image} alt={title} width="220px" height="auto" class="max-w-[220px]">
           <p class="mt-5 text-base">{isMarkdown ? post.frontmatter.tags : post.entry.tags}</p>
           </div>
 
