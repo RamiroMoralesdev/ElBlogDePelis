@@ -15,6 +15,8 @@ import vercel from "@astrojs/vercel/serverless";
 export default defineConfig({
   integrations: [tailwind(), react(), markdoc(), ...(process.env.SKIP_KEYSTATIC ? [] : [Keystatic()])],
   output: 'hybrid',
-  
+  adapter: vercel({
+    webAnalytics: { enabled: true }
+  }),  
 })
 
