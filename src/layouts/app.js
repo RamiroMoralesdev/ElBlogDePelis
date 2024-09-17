@@ -1,11 +1,6 @@
 import LogoText from "../components/LogoText.astro";
 
 
-// Vercel Analytics JS 
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  
-<script defer src="/_vercel/insights/script.js"></script>
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const showButtons = document.querySelectorAll(".show-button");
