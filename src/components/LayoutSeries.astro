@@ -1,92 +1,73 @@
 ---
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+
+// Obtener posts de Keystatic
+const reader = createReader(process.cwd(), keystaticConfig);
+const keystaticPosts = await reader.collections.posts.all();
+
+
+const SeriesPosts = await Astro.glob('/src/posts/series/*.md/'); 
+
+const seriesPorTemporada = Object.values(SeriesPosts).reduce((acc, serie) => {
+  const temporada = serie.path.split('/')[2] || 'desconocida'; // obtener la temporada
+  if (!acc[temporada]) acc[temporada] = [];
+  acc[temporada].push(serie);
+  return acc;
+}, {});
 
 ---
 <html>
 <head>
-  <script>
-
-document.addEventListener('DOMContentLoaded', () => {
-    const showButtons = document.querySelectorAll(".show-button");
-  
-    // Itera sobre cada botón y agrega un listener de eventos
-    showButtons.forEach((button, index) => {
-      button.addEventListener("click", function () {
-        const alertDialog = document.getElementById("dialog-dbz");
-        alertDialog.showModal();
-      });
-    });
-})
-
-const next = document.getElementById("next-ep")
-
-next.addEventListener("click", function (event) {
-    event.preventDefault(); // Evita que el enlace recargue la página
-    event.stopPropagation(); // Evita que el evento se propague y cierre el diálogo
-    const video = document.getElementById('video'); 
-    video.src = "https://www.youtube.com/embed/nFJ3Q1YW49M";
-})
-
-  </script>
+  <script src="./app.js"></script>
 </head>
 <body>
-  <ul id="listPosts" class="w-10/12 h-auto text-white shadow-2xl shadow-white mx-auto flex flex-row flex-wrap justify-between items-center">
+  {Object.entries(seriesPorTemporada).map(([temporada, series]) => (
+    <div>
+      <h2>{temporada}</h2>
+      <ul class="w-10/12 h-auto text-white shadow-2xl shadow-white mx-auto flex flex-row flex-wrap justify-between items-center">
+        {series.map((serie, index) => {
+          const title = serie.title; 
+          const description = serie.frontmatter.description;
+          const video = serie.frontmatter.video; 
+          const image = serie.frontmatter.image.url;
 
-        <li class="post-item">
-          <img src="/public/demo/portada.avif" alt="demo" 
-               class="show-button w-56 cursor-pointer m-2">
+          return (
+            <li class="post-item">
+              <img src={image} alt={title} 
+                   class="show-button w-56 cursor-pointer m-2" title={`${title}\n${description}`} data-index={index}>
 
-          <dialog id={`dialog-dbz`} class="w-4/5 h-full bg-[#13151a] text-white animate- ">
-          <button class="text-3xl text-[#13151a] bg-emerald-500 fixed top-5 left-5 hover:text-red-500 hover:scale-150">X</button>
+              <dialog id={`alert-dialog-${index}`} class="w-4/5 h-full bg-[#13151a] text-white animate- ">
+                <button class="text-3xl text-[#13151a] bg-emerald-500 fixed top-5 left-5 hover:text-red-500 hover:scale-150">X</button>
 
-          <section class=" w-full h-full flex flex-row">
-          
-          <div class="w-6/12 flex flex-col">
-          <img src="/public/demo/portada.avif" alt="demo" width="220px" height="auto" class="max-w-[220px]">
+                <section class="w-full h-full flex flex-row">
+                  <div class="w-6/12 flex flex-col">
+                    <img src={image} alt={title} width="220px" height="auto" class="max-w-[220px]">
+                  </div>
 
-          </div>
-
-          <div class="text-balance ml-12">
-            <h1 class="uppercase">Dragon Ball</h1>
-            <h2>1000 A.C</h2>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit nesciunt reprehenderit optio expedita illum sint exercitationem consequuntur aliquid earum! Pariatur deleniti consequatur optio in ratione amet culpa et vero impedit?</p>
-            
-            <!--Selector Season -->
-            <div class="mt-5">
-            <button class="bg-slate-600 border border-solid border-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded">
-              <a href="" class="text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-                Seleccionar Temporada
-              </a>
-            </button>
-            </div>
-
-            <div class="video-container w-full h-1/2">
-              <iframe  
-                id="video"
-                src="https://www.youtube.com/embed/cie7scVUdQE"
-                class="mt-10 w-3/4 h-full" 
-                allowfullscreen 
-                loading="lazy"
-              ></iframe>
-            </div>
-
-
-            <div>
-              <button>
-                <a id="next-ep" href="">Siguiente capitulo</a>
-              </button>
-            </div>
-
-          </div>
-        
-        </section>
-        </dialog>
-      </li>
-    )})}
-  </ul>
-
+                  <div class="text-balance ml-12">
+                    <h1 class="uppercase">{title}</h1>
+                    <p>{description}</p>
+                    <div class="video-container w-full h-1/2">
+                      <iframe 
+                        id={`video-${index}`} 
+                        src={video} 
+                        class="mt-10 w-3/4 h-full" 
+                        allowfullscreen 
+                        loading="lazy"
+                        title={title}
+                      ></iframe>
+                    </div>
+                  </div>
+                </section>
+              </dialog>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  ))}
+  
   <style>
     dialog::backdrop {
       background: linear-gradient(#000d, #000a);
