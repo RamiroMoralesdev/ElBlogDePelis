@@ -1,4 +1,5 @@
 ---
+
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 
@@ -17,7 +18,7 @@ const allPosts = [...mdPosts, ...keystaticPosts].sort((a, b) => {
 ---
 <html>
 <head>
-  <script src="./app.js"></script>
+  <script src="../app.js"></script>
 </head>
 <body>
   <ul id="listPosts" class="w-10/12 h-auto text-white shadow-2xl shadow-white mx-auto flex flex-row flex-wrap justify-between items-center">
