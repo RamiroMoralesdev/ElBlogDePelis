@@ -1,5 +1,4 @@
-import LogoText from "../components/LogoText.astro";
-
+import LogoText from './components/LogoText.astro'
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -87,6 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-
-
   
+  btnNext = document.getElementById('btnNext')
+  
+  btnNext.addEventListener("click", function (event) {
+    event.preventDefault(); // Evita que el enlace recargue la página
+    event.stopPropagation(); // Evita que el evento se propague y cierre el diálogo
+    const video = document.getElementById('video'); // Cambiado para seleccionar el iframe por ID
+    video.src = "https://www.youtube.com/embed/nFJ3Q1YW49M"; // Cambia la URL del video
+})
