@@ -1,10 +1,5 @@
 ---
-
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../keystatic.config';
-
-const SeriesPosts = await Astro.glob('../posts/series/demo/season/Alerta  roja.md');
-console.log(SeriesPosts)
+const SeriesPosts = await Astro.glob('../posts/series/*/*/capitulo-1.md');
 
 ---
 <html>
@@ -61,7 +56,7 @@ console.log(SeriesPosts)
         </section>
         </dialog>
       </li>
-      ); // Fin del return
+      );
     })}
   </ul>
 
