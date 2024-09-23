@@ -1,19 +1,34 @@
 ---
-const SeriesPosts = await Astro.glob('../posts/series/*/*/capitulo-1.md');
+const SeriesPosts = await Astro.glob('../posts/series/*/Temporada-1/capitulo-*.md');
+
+// Ordenar los capítulos por el campo "order" del frontmatter
+const sortedPosts = SeriesPosts.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
+console.log(sortedPosts)
+
+// Encontrar el índice del capítulo actual y obtener el siguiente capítulo
+function getNextChapterUrl(currentIndex) {
+  if (currentIndex < sortedPosts.length - 1) {
+    return sortedPosts[currentIndex + 1].frontmatter.video;  // URL del siguiente capítulo
+  }
+  return null;  // No hay más capítulos
+}
 
 ---
 <html>
 <head>
-  <script src="../app.js"></script>
+  
 </head>
 <body>
   <ul id="listPosts" class="w-10/12 h-auto text-white shadow-2xl shadow-white mx-auto flex flex-row flex-wrap justify-between items-center">
     {SeriesPosts.map((post, index) => {
       const title = post.frontmatter.title;
+      const seasons = post.frontmatter.seasons;
       const description = post.frontmatter.description;
       const fecha = post.frontmatter.date;
       const video = post.frontmatter.video;
       const image = post.frontmatter.image.url;
+      const nextChapterUrl = getNextChapterUrl(index);
+
 
       return ( // Mover el return aquí
         <li class="post-item">
@@ -37,7 +52,6 @@ const SeriesPosts = await Astro.glob('../posts/series/*/*/capitulo-1.md');
 
             <div class="video-container w-full h-1/2">
               <iframe 
-  
                 id={`video-${index}`} 
                 src={video} 
                 class="mt-10 w-3/4 h-full" 
@@ -48,7 +62,15 @@ const SeriesPosts = await Astro.glob('../posts/series/*/*/capitulo-1.md');
             </div>
 
             <div>
-              <a href="" id="btn-next">Siguente episodio</a>
+              <a href="#" id={`btnNext-${index}`} class="btn-next" data-index={index}>Siguiente episodio</a>
+            </div>
+
+            <div>
+              <p>Lista de Episodios</p>
+
+              <div>
+                <a href="#">Temporada {seasons}</a>
+              </div>
             </div>
 
           </div>
@@ -65,5 +87,28 @@ const SeriesPosts = await Astro.glob('../posts/series/*/*/capitulo-1.md');
       background: linear-gradient(#000d, #000a);
     }
   </style>
+
+  <script>
+    // Cambiar el video al hacer clic en "Siguiente episodio"
+    document.querySelectorAll(".btn-next").forEach(button => {
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        
+        const nextVideoUrl = button.getAttribute("data-next-url"); // Obtener la URL del siguiente capítulo
+        const index = button.id.split('-')[1]; // Obtener el índice del episodio actual
+        
+        // Selecciona el iframe correspondiente al episodio actual
+        const videoIframe = document.getElementById(`video-${index}`);
+        
+        // Si existe un siguiente capítulo, actualiza el iframe con la nueva URL
+        if (nextVideoUrl) {
+          videoIframe.src = nextVideoUrl;
+        } else {
+          alert('No hay más episodios disponibles.');
+        }
+      });
+    });
+  </script>
+  
 </body>
 </html>
