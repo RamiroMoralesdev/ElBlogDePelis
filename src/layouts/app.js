@@ -51,6 +51,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (video) video.pause();
       });
     }
+
+    const next = document.querySelectorAll('.next');
+    next.forEach((boton) => {
+      boton.addEventListener('click', () => {
+        const src = boton.dataset.video;
+        if (src) video.src = src;
+      });
+      console.log(boton.dataset.video);
+    });
+    
+  
+    const prev = document.querySelectorAll('.prev');
+  
+    if (prev) {
+      prev.forEach((boton) => {
+        boton.addEventListener('click', () => {
+          if (video) video.currentTime -= 10;
+        });
+      });
+    }
   
     // Precargar imagenes en cache
     function preload(image, url) {
